@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admin RSVP — Made & Ayu</title>
+  <meta name="theme-color" content="#102f2b" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root { --forest:#102f2b; --forest-2:#1d5147; --gold:#d1a45d; --cream:#f5eee3; --paper:#fffdf8; --ink:#1f302c; --muted:#718079; --red:#a85b50; --green:#418568; }
+    * { box-sizing:border-box; } body { margin:0; color:var(--ink); background:var(--cream); font:15px/1.6 "DM Sans",system-ui,sans-serif; }
+    button,input { font:inherit; } button { cursor:pointer; } .hidden { display:none!important; }
+    .login { min-height:100vh; display:grid; place-items:center; padding:24px; background:linear-gradient(135deg,rgba(8,30,27,.92),rgba(16,47,43,.94)),url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1800&q=85') center/cover; }
+    .login-card { width:min(450px,100%); padding:48px 34px; text-align:center; color:var(--paper); border:1px solid rgba(209,164,93,.55); border-radius:4px; background:rgba(16,47,43,.82); box-shadow:0 30px 70px rgba(0,0,0,.25); }
+    .mark { display:grid; place-items:center; width:58px;height:58px;margin:0 auto 22px;border:1px solid var(--gold);border-radius:50%;color:var(--gold);font:2rem "Cormorant Garamond",serif; }
+    h1,h2,h3 { margin:0; font-family:"Cormorant Garamond",Georgia,serif; line-height:1; } h1{font-size:3.6rem;color:#ecd39b;} h2{font-size:3rem;color:var(--forest);} h3{font-size:1.7rem;color:var(--forest);}
+    .eyebrow { color:var(--gold);font-size:.7rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase; } .login-card p{color:rgba(255,255,255,.72);}
+    .btn { display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 18px;border:0;border-radius:999px;font-weight:700;transition:.2s; } .btn:hover{transform:translateY(-1px);} .btn-google{color:var(--forest);background:#fff;}.btn-dark{color:#fff;background:var(--forest);}.btn-light{color:var(--forest);background:#f2dfb6;}
+    .dashboard{min-height:100vh;} .topbar{display:flex;align-items:center;justify-content:space-between;padding:18px clamp(18px,5vw,70px);color:#fff;background:var(--forest);}.brand{font:2rem "Cormorant Garamond",serif;color:#ecd39b;} .top-actions{display:flex;align-items:center;gap:14px;font-size:.8rem;}.avatar{width:32px;height:32px;border-radius:50%;background:#f2dfb6;color:var(--forest);display:grid;place-items:center;font-weight:700;}
+    main{width:min(1180px,calc(100% - 36px));margin:0 auto;padding:55px 0 80px;} .headline{display:flex;align-items:end;justify-content:space-between;gap:25px;margin-bottom:32px;} .headline p{color:var(--muted);margin:8px 0 0;}
+    .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px;} .stat{padding:24px;border:1px solid rgba(209,164,93,.28);border-radius:5px;background:var(--paper);box-shadow:0 12px 30px rgba(16,47,43,.06);}.stat-label{color:var(--muted);font-size:.78rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;}.stat-value{display:block;margin-top:12px;color:var(--forest);font:3rem "Cormorant Garamond",serif;}.stat.green .stat-value{color:var(--green)}.stat.red .stat-value{color:var(--red)}.stat.gold .stat-value{color:var(--gold)}
+    .panel{border:1px solid rgba(209,164,93,.25);border-radius:5px;background:var(--paper);box-shadow:0 12px 30px rgba(16,47,43,.06);overflow:hidden;}.panel-head{display:flex;align-items:center;justify-content:space-between;gap:15px;padding:22px 24px;border-bottom:1px solid #eee5d8;}.panel-head h2{font-size:2.1rem;}.tools{display:flex;gap:10px;align-items:center;}.search{width:min(280px,50vw);padding:10px 13px;border:1px solid #dfd5c5;border-radius:999px;outline:0;background:#fff;}.search:focus{border-color:var(--gold);}
+    .table-wrap{overflow-x:auto;} table{width:100%;border-collapse:collapse;min-width:720px;} th,td{padding:15px 24px;text-align:left;border-bottom:1px solid #f0e8dc;vertical-align:top;} th{color:var(--muted);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;} td{font-size:.9rem;} .status{display:inline-flex;padding:4px 9px;border-radius:999px;font-size:.72rem;font-weight:700;}.status.yes{color:#28674f;background:#dcefe5;}.status.no{color:#8d4d46;background:#f7ded9;}.empty{text-align:center;padding:50px;color:var(--muted);}.updated{color:var(--muted);font-size:.78rem;}
+    .error{margin:16px 0;padding:13px 16px;border-left:3px solid var(--red);color:#7f413a;background:#fff0ed;} footer{padding:24px;text-align:center;color:var(--muted);font-size:.75rem;}
+    @media(max-width:800px){.stats{grid-template-columns:repeat(2,1fr)}.headline{display:block}.headline .btn{margin-top:18px}.topbar{padding:15px 18px}.top-actions span{display:none}} @media(max-width:520px){.stats{gap:10px}.stat{padding:16px}.stat-value{font-size:2.4rem}main{width:min(100% - 24px,1180px)}.panel-head{display:block}.tools{margin-top:15px}.search{width:100%}}
+  </style>
+</head>
+<body>
+  <section class="login" id="loginView">
+    <div class="login-card">
+      <div class="mark">ॐ</div><div class="eyebrow">Made & Ayu · Private Area</div><h1>Admin RSVP</h1>
+      <p>Masuk menggunakan akun Google admin untuk memantau konfirmasi kehadiran tamu.</p>
+      <button class="btn btn-google" id="loginButton">Masuk dengan Google →</button>
+      <div class="error hidden" id="loginError"></div>
+    </div>
+  </section>
+
+  <section class="dashboard hidden" id="dashboardView">
+    <header class="topbar"><div class="brand">Made & Ayu <span style="font: .8rem 'DM Sans';color:#fff;opacity:.65">/ Admin RSVP</span></div><div class="top-actions"><div class="avatar" id="avatar">A</div><span id="adminEmail"></span><button class="btn btn-light" id="logoutButton">Keluar</button></div></header>
+    <main>
+      <div class="headline"><div><div class="eyebrow">Dashboard pribadi</div><h2>Ringkasan Kehadiran</h2><p>Data RSVP terhubung langsung ke Cloud Firestore.</p></div><button class="btn btn-dark" id="refreshButton">↻ Refresh Data</button></div>
+      <div class="stats"><article class="stat"><span class="stat-label">Total RSVP</span><strong class="stat-value" id="totalCount">0</strong></article><article class="stat green"><span class="stat-label">Akan hadir</span><strong class="stat-value" id="yesCount">0</strong></article><article class="stat red"><span class="stat-label">Belum hadir</span><strong class="stat-value" id="noCount">0</strong></article><article class="stat gold"><span class="stat-label">Total tamu</span><strong class="stat-value" id="guestCount">0</strong></article></div>
+      <div class="panel"><div class="panel-head"><div><h2>Daftar Konfirmasi</h2><span class="updated" id="updatedAt">Memuat data…</span></div><div class="tools"><input class="search" id="searchInput" type="search" placeholder="Cari nama atau ucapan…" /></div></div><div class="table-wrap"><table><thead><tr><th>Nama</th><th>Kehadiran</th><th>Tamu</th><th>Ucapan & doa</th><th>Waktu</th></tr></thead><tbody id="rsvpTable"><tr><td colspan="5" class="empty">Memuat konfirmasi…</td></tr></tbody></table></div></div>
+    </main><footer>Admin panel privat · Firestore read access dilindungi akun admin</footer>
+  </section>
+
+  <script type="module">
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js';
+    import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js';
+    import { getFirestore, collection, getDocs, query, orderBy } from 'https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js';
+
+    const firebaseConfig = { apiKey:'AIzaSyCMvDHO2i_BkA30rr0vuiwTLOmEe5G-QHE', authDomain:'undangan-bali-made-ayu-2026.firebaseapp.com', projectId:'undangan-bali-made-ayu-2026', storageBucket:'undangan-bali-made-ayu-2026.firebasestorage.app', messagingSenderId:'30208061377', appId:'1:30208061377:web:178a337548b02b04000940' };
+    const app = initializeApp(firebaseConfig); const auth = getAuth(app); const db = getFirestore(app); const provider = new GoogleAuthProvider();
+    const ADMIN_EMAIL = 'kadekduwiaditiya@gmail.com'; let allRows = [];
+    const $ = id => document.getElementById(id); const loginView=$('loginView'), dashboardView=$('dashboardView');
+    $('loginButton').addEventListener('click', async () => { try { await signInWithPopup(auth, provider); } catch(error) { $('loginError').textContent='Login gagal: '+error.message; $('loginError').classList.remove('hidden'); } });
+    $('logoutButton').addEventListener('click', () => signOut(auth));
+    $('refreshButton').addEventListener('click', loadRows); $('searchInput').addEventListener('input', renderRows);
+    onAuthStateChanged(auth, async user => { if(user && user.email===ADMIN_EMAIL) { loginView.classList.add('hidden'); dashboardView.classList.remove('hidden'); $('adminEmail').textContent=user.email; $('avatar').textContent=(user.displayName||user.email).charAt(0).toUpperCase(); await loadRows(); } else if(user) { await signOut(auth); $('loginError').textContent='Akun ini bukan akun admin yang terdaftar.'; $('loginError').classList.remove('hidden'); } else { loginView.classList.remove('hidden'); dashboardView.classList.add('hidden'); } });
+    async function loadRows() { $('updatedAt').textContent='Memuat data…'; try { const snapshot=await getDocs(query(collection(db,'rsvp'),orderBy('createdAt','desc'))); allRows=snapshot.docs.map(doc=>({id:doc.id,...doc.data()})); renderRows(); $('updatedAt').textContent='Diperbarui '+new Date().toLocaleString('id-ID'); } catch(error) { $('updatedAt').textContent='Gagal memuat data'; $('rsvpTable').innerHTML='<tr><td colspan="5" class="empty">Firestore menolak pembacaan data. Periksa Rules admin.</td></tr>'; console.error(error); } }
+    function renderRows() { const search=$('searchInput').value.toLowerCase(); const rows=allRows.filter(row=>(row.name||'').toLowerCase().includes(search)||(row.message||'').toLowerCase().includes(search)); const yes=allRows.filter(row=>(row.attendance||'').toLowerCase().startsWith('ya')).length; $('totalCount').textContent=allRows.length; $('yesCount').textContent=yes; $('noCount').textContent=allRows.length-yes; $('guestCount').textContent=allRows.reduce((sum,row)=>sum+(parseInt(row.guests)||1),0); $('rsvpTable').innerHTML=rows.length?rows.map(row=>{const isYes=(row.attendance||'').toLowerCase().startsWith('ya'); const date=row.createdAt?.toDate?row.createdAt.toDate().toLocaleString('id-ID'):'—'; return '<tr><td><strong>'+escapeHtml(row.name||'—')+'</strong></td><td><span class="status '+(isYes?'yes':'no')+'">'+escapeHtml(row.attendance||'—')+'</span></td><td>'+escapeHtml(row.guests||'—')+'</td><td>'+escapeHtml(row.message||'—')+'</td><td>'+date+'</td></tr>';}).join(''):'<tr><td colspan="5" class="empty">Belum ada data yang cocok.</td></tr>'; }
+    function escapeHtml(value){return String(value).replace(/[&<>'"]/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[char]));}
+  </script>
+</body>
+</html>
