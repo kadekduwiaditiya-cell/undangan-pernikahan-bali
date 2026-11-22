@@ -10,7 +10,9 @@ service cloud.firestore {
         && request.resource.data.guests is string
         && request.resource.data.message is string
         && request.resource.data.message.size() < 1000;
-      allow read, update, delete: if false;
+      allow read: if request.auth != null
+        && request.auth.token.email == 'kadekduwiaditiya@gmail.com';
+      allow update, delete: if false;
     }
   }
 }
