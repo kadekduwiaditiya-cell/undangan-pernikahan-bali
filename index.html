@@ -358,16 +358,14 @@
     import { getFirestore, collection, addDoc, serverTimestamp } from 'https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js';
 
     const firebaseConfig = {
-      apiKey: 'ISI_API_KEY_ANDA',
-      authDomain: 'PROJECT_ID_ANDA.firebaseapp.com',
-      projectId: 'PROJECT_ID_ANDA',
-      storageBucket: 'PROJECT_ID_ANDA.firebasestorage.app',
-      messagingSenderId: 'ISI_SENDER_ID_ANDA',
-      appId: 'ISI_APP_ID_ANDA'
+      apiKey: 'AIzaSyCMvDHO2i_BkA30rr0vuiwTLOmEe5G-QHE',
+      authDomain: 'undangan-bali-made-ayu-2026.firebaseapp.com',
+      projectId: 'undangan-bali-made-ayu-2026',
+      storageBucket: 'undangan-bali-made-ayu-2026.firebasestorage.app',
+      messagingSenderId: '30208061377',
+      appId: '1:30208061377:web:178a337548b02b04000940'
     };
-    const isConfigured = !Object.values(firebaseConfig).some(value => value.includes('ISI_') || value.includes('PROJECT_ID_ANDA'));
-    let db = null;
-    if (isConfigured) db = getFirestore(initializeApp(firebaseConfig));
+    const db = getFirestore(initializeApp(firebaseConfig));
     window.saveRSVP = async (data) => {
       const message = document.getElementById('formMessage');
       if (!db) return;
